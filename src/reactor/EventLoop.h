@@ -6,6 +6,8 @@
 #include <mutex>
 #include <thread>
 
+namespace xweb {
+
 class EventLoop {
 public:
   using Function = std::function<void()>;
@@ -49,3 +51,5 @@ private:
   void doPendingFunctions();
   void handleConn();
 };
+
+}

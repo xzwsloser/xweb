@@ -4,6 +4,8 @@
 #include "../reactor/EventLoop.h"
 #include "../pool/EventLoopThreadPool.h"
 
+namespace xweb {
+
 class TcpServer {
 public:
     using CallBack = std::function<void(int , SP_EventLoop)>;
@@ -26,3 +28,5 @@ private:
     // the callback function to handle the new connection
     CallBack callback_;
 };
+
+}

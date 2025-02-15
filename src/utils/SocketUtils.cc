@@ -8,6 +8,8 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>
 
+namespace xweb {
+
 void SocketUtils::ignoreSigPipe()
 {
     struct sigaction sa;
@@ -65,30 +67,4 @@ int SocketUtils::socketBindListen(int port)
     return listenfd;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

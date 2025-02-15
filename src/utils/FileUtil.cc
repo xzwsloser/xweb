@@ -2,6 +2,8 @@
 #include "FileUtil.h"
 #include<stdio.h>
 
+namespace xweb {
+
 AppendFile::AppendFile(std::string file_name):
     fp_(fopen(file_name.c_str() , "a")) 
 {
@@ -42,4 +44,6 @@ void AppendFile::append(const char* log_line , size_t len)
         nread += x;
         nleft = len - nread;
     }
+}
+
 }

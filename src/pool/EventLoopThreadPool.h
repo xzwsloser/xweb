@@ -4,6 +4,8 @@
 #include "../reactor/EventLoop.h"
 #include "../logger/Logger.h"
 
+namespace xweb {
+
 class EventLoopThreadPool {
 public:
     EventLoopThreadPool(EventLoop* loop , int numThreads);
@@ -18,3 +20,5 @@ private:
     int index_;
     std::vector<std::shared_ptr<EventLoopThread>> threads_;
 };
+
+}

@@ -7,6 +7,8 @@
 #include<time.h>
 #include<sys/time.h>
 
+namespace xweb {
+
 static std::once_flag flag;
 static AsyncLogger* AsyncLogger_;
 
@@ -105,4 +107,6 @@ Logger::~Logger()
     impl_.stream_ << "\t\t" << impl_.basename_ << impl_.line_ << '\n';
     const LogStream::Buffer& buf{ stream().buffer() };
     output(buf.data() , buf.length());
+}
+
 }

@@ -2,6 +2,8 @@
 #include "EventLoopThread.h"
 #include "../pool/MemoryPool.h"
 
+namespace xweb {
+
 EventLoopThread::EventLoopThread()
     :loop_(newElement<EventLoop>() , deleteElement<EventLoop>),
      thread_(nullptr , deleteThread)
@@ -31,4 +33,6 @@ void EventLoopThread::start()
 void EventLoopThread::threadFunc()
 {
     loop_-> loop();
+}
+
 }

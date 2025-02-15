@@ -18,6 +18,8 @@
 /*    } while (val != 0);*/
 /*}*/
 
+namespace xweb {
+
 template<typename T>
 void LogStream::append(T value)
 {
@@ -116,4 +118,4 @@ LogStream& LogStream::operator<< (long double v)
     return *this;
 }
 
-
+}

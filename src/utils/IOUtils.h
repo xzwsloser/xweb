@@ -7,6 +7,8 @@
 #include <signal.h>
 #include <string>
 
+namespace xweb {
+
 class IOUtils: nocopyable {
 public:
     // read n bytes from fd to buff
@@ -20,3 +22,5 @@ private:
     IOUtils() = delete;
     ~IOUtils() =delete;
 };
+
+}

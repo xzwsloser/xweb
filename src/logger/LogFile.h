@@ -5,6 +5,9 @@
 #include<mutex>
 #include<memory>
 
+
+namespace xweb {
+
 class LogFile: nocopyable {
 public:
     LogFile(const std::string& base_name , int flushEveryN = 1024); 
@@ -23,3 +26,5 @@ private:
     std::unique_ptr<std::mutex> mutex_;
     std::unique_ptr<AppendFile> file_;
 };
+
+}

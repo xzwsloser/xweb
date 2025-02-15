@@ -3,6 +3,8 @@
 #include <cerrno>
 #define MAX_BUFF 4096
 
+namespace xweb {
+
 ssize_t IOUtils::readn(int fd, void *buff, size_t n) {
   size_t nleft = n;
   ssize_t readSum = 0;
@@ -125,4 +127,6 @@ ssize_t IOUtils::writen(int fd, std::string &sbuff) {
     sbuff = sbuff.substr(writeSum);
   }
   return writeSum;
+}
+
 }

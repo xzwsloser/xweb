@@ -4,6 +4,8 @@
 #include <memory>
 #include <thread>
 
+namespace xweb {
+
 using SP_EventLoop = std::shared_ptr<EventLoop>;
 
 class EventLoopThread {
@@ -24,3 +26,5 @@ private:
   SP_EventLoop loop_;
   std::unique_ptr<std::thread, decltype(&deleteThread)> thread_;
 };
+
+} // namespace xweb

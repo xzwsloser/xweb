@@ -5,6 +5,8 @@
 #include<cstring>
 #include "../utils/nocopyable.h"
 
+namespace xweb { 
+
 constexpr int kSmallBufferSize = 4096;  // 4KB
 constexpr int kLargeBufferSize = 4096 * 1024;  // 4MB                                    
                                                
@@ -118,3 +120,5 @@ private:
     // show the log or not
     bool is_show_{true}; 
 };
+
+}

@@ -4,6 +4,8 @@
 #include <cassert>
 #include <sys/epoll.h>
 
+namespace xweb {
+
 const int EVENTSUM = 4096; // events number
 const int EPOLLWAIT_TIME = 1000;                        
 
@@ -92,4 +94,6 @@ void EpollPoller::addTimer(SP_Channel holder , int timeout)
     } else {
         LOG_ERROR << "timer add failed!";
     }
+}
+
 }

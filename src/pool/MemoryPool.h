@@ -3,6 +3,9 @@
 #include <memory>
 #include <mutex>
 
+
+namespace xweb {
+
 #define BLOCKSIZE 4096 // 4KB
 #define MEMORYPOOLNUM 64
 
@@ -63,4 +66,6 @@ void deleteElement(T *p) {
   }
 
   freeMemory(sizeof(T), reinterpret_cast<void *>(p));
+}
+
 }

@@ -2,6 +2,8 @@
 #include "MemoryPool.h"
 #include <cassert>
 
+namespace xweb {
+
 MemoryPool::~MemoryPool() {
   // free the blocks
   Slot *cur = current_block_;
@@ -117,4 +119,6 @@ void freeMemory(size_t size, void *p)
     }
     
     getMemoryPool(((size + 7) >> 3) - 1).deAllcate(reinterpret_cast<Slot*>(p));
+}
+
 }

@@ -13,6 +13,9 @@
 #include <vector>
 #include <memory>
 
+
+namespace xweb {
+
 class ThreadPool {
 public:
   ThreadPool(int minThreads = 5,
@@ -60,20 +63,4 @@ auto ThreadPool::AddTask(F&& f , Args&&... args)
     return res;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

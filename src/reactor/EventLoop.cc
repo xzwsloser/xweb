@@ -12,6 +12,8 @@
 #include <sys/eventfd.h>
 #include <vector>
 
+namespace xweb {
+
 int EventLoop::createEventfd() {
   int evfd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
   if (evfd < 0) {
@@ -142,4 +144,6 @@ void EventLoop::stopLoop() {
 
 void EventLoop::shutDown(std::shared_ptr<Channel> channel) {
   shutdown(channel->getFd(), SHUT_WR);
+}
+
 }

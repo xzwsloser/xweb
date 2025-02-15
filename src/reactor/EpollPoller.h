@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <vector>
 
+namespace xweb {
+
 class EpollPoller {
 public:
   EpollPoller();
@@ -30,3 +32,5 @@ private:
   std::unordered_map<int, SP_Channel> channel_map_; // fd -> Channel //
   TimerManager timer_manager_;                                                   
 };
+
+}

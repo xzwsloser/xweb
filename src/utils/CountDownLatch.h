@@ -5,6 +5,8 @@
 #include<mutex>
 #include<condition_variable>
 
+namespace xweb {
+
 class CountDownLatch: nocopyable {
 public:
     explicit CountDownLatch(int count);
@@ -15,3 +17,5 @@ private:
     std::condition_variable condition_;
     int count_;
 };
+
+}

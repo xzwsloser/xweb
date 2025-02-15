@@ -3,6 +3,8 @@
 #include<string>
 #include "nocopyable.h"
 
+namespace xweb {
+
 class AppendFile: nocopyable {
 public:
     explicit AppendFile(std::string file_name);
@@ -17,3 +19,5 @@ private:
     FILE* fp_;
     char buffer_[64 * 1024];  // 64KB
 };
+
+}

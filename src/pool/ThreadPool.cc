@@ -4,6 +4,8 @@
 #include <chrono>
 #include "../logger/Logger.h"
 
+namespace xweb {
+
 ThreadPool::ThreadPool(int minThreads, int maxThreads)
     : min_threads_(minThreads), max_threads_(maxThreads), stop_(false),
       exit_numbers_(0) {
@@ -95,4 +97,5 @@ void ThreadPool::manager()
             idle_threads_++;
         }
     }
+}
 }

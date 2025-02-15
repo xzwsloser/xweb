@@ -9,6 +9,8 @@
 #include<vector>
 #include<memory>
 
+namespace xweb {
+
 class AsyncLogger: nocopyable {
 public:
     AsyncLogger(const std::string base_name , int flushInterval = 2);
@@ -34,3 +36,5 @@ private:
     BufferPtr nextBuffer_;
     BufferVector buffers_; CountDownLatch latch_; 
 };
+
+} // namespace xweb

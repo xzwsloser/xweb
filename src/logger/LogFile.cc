@@ -2,6 +2,8 @@
 #include "LogFile.h"
 #include<mutex>
 
+namespace xweb {
+
 LogFile::LogFile(const std::string& base_name , int flushEvenryN_):
     base_name_(base_name),
     flushEvenryN_(flushEvenryN_),
@@ -32,4 +34,6 @@ void LogFile::flush()
 {
     std::lock_guard<std::mutex> lock{ *mutex_ };
     file_->flush();
+}
+
 }

@@ -4,6 +4,8 @@
 #include <cassert>
 #include <functional>
 
+namespace xweb {
+
 AsyncLogger::AsyncLogger(std::string logFileName_, int flushInterval)
     : flushInterval_(flushInterval), is_running_(false),
       base_name_(logFileName_), currentBuffer_(new Buffer),
@@ -115,3 +117,5 @@ void AsyncLogger::threadFunc() {
   }
   output.flush();
 }
+
+} // namespace xweb

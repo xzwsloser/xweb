@@ -5,6 +5,8 @@
 #include <string>
 #include <sys/epoll.h>
 
+namespace xweb {
+
 class EventLoop;
 /*class HttpConnection;*/
 
@@ -55,3 +57,5 @@ public:
 };
 
 using SP_Channel = std::shared_ptr<Channel>;
+
+}

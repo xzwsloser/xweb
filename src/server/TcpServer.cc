@@ -7,6 +7,8 @@
 #include<cstring>
 #include<memory>
 
+namespace xweb {
+
 TcpServer::TcpServer(EventLoop* loop , int threadNum , int port)
     : loop_(loop),
       thread_num_(threadNum),
@@ -55,4 +57,6 @@ void TcpServer::handleNewConn()
         callback_(accept_fd , loop);
     }
     accept_channel_ -> setEvents(EPOLLIN | EPOLLOUT); 
+}
+
 }

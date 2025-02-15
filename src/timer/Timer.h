@@ -6,6 +6,7 @@
 #include "../reactor/Channel.h"
 
 /*class HttpConnection;*/
+namespace xweb {
 
 class TimerNode {
 public:
@@ -48,3 +49,5 @@ private:
   std::priority_queue<SP_TimerNode, std::deque<SP_TimerNode>, TimerCmp>
       timer_node_queue_;
 };
+
+}

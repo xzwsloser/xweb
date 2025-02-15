@@ -6,6 +6,8 @@
 #include<iostream>
 #include "AsyncLogger.h"
 
+namespace xweb {
+
 enum class logger_level: unsigned int { DEBUG , INFO , WARN , ERROR , FATAL};
 
 class Logger {
@@ -45,3 +47,5 @@ private:
 #define LOG_WARN Logger(__FILE__,__LINE__,logger_level::WARN).stream()
 #define LOG_ERROR Logger(__FILE__,__LINE__,logger_level::ERROR).stream()
 #define LOG_FATAL Logger(__FILE__,__LINE__,logger_level::FATAL).stream()
+
+}

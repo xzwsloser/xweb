@@ -1,8 +1,10 @@
 // @Author loser
 #include "Channel.h"
-#include <sys/epoll.h>
-#include<unistd.h>
 #include "EventLoop.h"
+#include <sys/epoll.h>
+#include <unistd.h>
+
+namespace xweb {
 
 Channel::Channel(EventLoop *loop)
     : loop(loop), revents_(0), events_(0), last_events_(0) {}
@@ -10,17 +12,14 @@ Channel::Channel(EventLoop *loop)
 Channel::Channel(EventLoop *loop, int fd)
     : loop(loop), revents_(0), events_(0), last_events_(0), fd_(fd) {}
 
-
-Channel::~Channel()
-{
-    close(fd_);
-    loop->pollerDel(fd_);
+Channel::~Channel() {
+  close(fd_);
+  loop->pollerDel(fd_);
 }
 
 void Channel::setFd(int fd) { this->fd_ = fd; }
 
 int Channel::getFd() { return this->fd_; }
-
 
 /*void Channel::setHolder(std::shared_ptr<HttpConnection> holder) {*/
 /*  this->holder_ = std::weak_ptr<HttpConnection>(holder);*/
@@ -117,3 +116,5 @@ bool Channel::equalAndUpdateLastEvents() {
   last_events_ = events_;
   return ret;
 }
+
+} // namespace xweb
