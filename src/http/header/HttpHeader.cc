@@ -41,7 +41,7 @@ std::string HttpHeader::operator[](const std::string& key)
     return headers_[key];
 }
 
-std::string HttpHeader::Build()
+std::string HttpHeader::ToString()
 {
     std::vector<std::string> result;
     for(auto& pair : headers_) {

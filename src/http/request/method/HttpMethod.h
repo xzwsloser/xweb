@@ -23,6 +23,12 @@ public:
     };
 
     static Method CovertToMethod(const std::string& method);
+    static std::string ConvertToStr(Method method);
+
+    void SetMethod(Method method);
+    Method GetMethod();
+
+    std::string ToString() { return ConvertToStr(method_); }
 
 private:
     Method method_;

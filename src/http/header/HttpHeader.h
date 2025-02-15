@@ -28,7 +28,7 @@ public:
     std::string Get(const std::string& key);
     std::string operator[](const std::string& key);
 
-    std::string Build();
+    std::string ToString();
 
 private:
     std::pmr::unordered_map<std::string,std::string> headers_;
