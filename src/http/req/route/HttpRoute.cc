@@ -2,18 +2,21 @@
 #include "HttpRoute.h"
 #include "../../../utils/StringUtils.h"
 #include<vector>
+#include "../../../utils/const.h"
+#include "../../../logger/Logger.h"
 
 // example: /hello/go?key1=value1&key2=value2&key3=value3
 
 namespace xweb {
 
-void HttpRoute::Parse(const std::string& path)
+int HttpRoute::Parse(const std::string& path)
 {
     int pos = path.find("?");
 
     if(pos == std::string::npos) {
         path_ = path;
-        return ;
+        LOG_WARN << "path is empty";
+        return kLogicerr;
     }
 
     path_ = path.substr(0 , pos);
@@ -26,6 +29,7 @@ void HttpRoute::Parse(const std::string& path)
         std::string value = str.substr(pos + 1);
         params_[key] = value;
     }
+    return kSuccess;
 }
 
 void HttpRoute::SetPath(const std::string& path)

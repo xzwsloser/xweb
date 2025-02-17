@@ -1,4 +1,4 @@
-#include "../../../src/http/request/HttpReq.h"
+#include "../../../src/http/req/HttpReq.h"
 #include<iostream>
 
 using namespace xweb;

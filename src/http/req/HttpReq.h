@@ -5,6 +5,7 @@
 #include "./route/HttpRoute.h"
 #include "../header/HttpHeader.h"
 #include "../version/HttpVersion.h"
+#include "../../utils/const.h"
 
 
 // 请求 = 请求行 + 请求头 + /r/n + 请求体
@@ -26,7 +27,7 @@ public:
     HttpReq() = default;
     ~HttpReq() = default;
 
-    void Parse(const std::string& req);
+    int Parse(const std::string& req);
     
     HttpMethod& GetMethod() { return method_; }
     void SetMethod(HttpMethod method) { method_ = method; }

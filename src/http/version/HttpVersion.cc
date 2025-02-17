@@ -3,7 +3,7 @@
 
 namespace xweb {
 
-HttpVersion::Version HttpVersion::ConverToVersion(const std::string &version)
+Version HttpVersion::ConverToVersion(const std::string &version)
 {
     if(version == "HTTP/1.1") {
         return Version::HTTP_1_1;
@@ -32,7 +32,7 @@ void HttpVersion::SetVersion(Version version)
     version_ = version;
 }
 
-HttpVersion::Version HttpVersion::GetVersion()
+Version HttpVersion::GetVersion()
 {
     return version_;
 }

@@ -2,29 +2,29 @@
 
 namespace xweb {
 
-HttpMethod::Method HttpMethod::CovertToMethod(const std::string &method)
+Method HttpMethod::CoverToMethod(const std::string &method)
 {
     if(method == "GET") {
-        return HttpMethod::Method::GET;
+        return Method::GET;
     } else if(method == "POST") {
-        return HttpMethod::Method::POST;
+        return Method::POST;
     } else if(method == "PUT") {
-        return HttpMethod::Method::PUT;
+        return Method::PUT;
     } else if(method == "DELETE") {
-        return HttpMethod::Method::DELETE;
+        return Method::DELETE;
     } else if(method == "HEAD") {
-        return HttpMethod::Method::HEAD;
+        return Method::HEAD;
     } else if(method == "OPTIONS") {
-        return HttpMethod::Method::OPTIONS;
+        return Method::OPTIONS;
     } else if(method == "PATCH") {
-        return HttpMethod::Method::PATCH;
+        return Method::PATCH;
     } else if(method == "CONNECT") {
-        return HttpMethod::Method::CONNECT;
+        return Method::CONNECT;
     }
-    return HttpMethod::Method::UNKNOW;
+    return Method::UNKNOW;
 }
 
-std::string HttpMethod::ConvertToStr(Method method)
+std::string HttpMethod::ConverToStr(Method method)
 {
     switch (method) {
         case Method::GET:
@@ -51,12 +51,12 @@ std::string HttpMethod::ConvertToStr(Method method)
     return "UNKNOW";
 }
 
-void HttpMethod::SetMethod(HttpMethod::Method method)
+void HttpMethod::SetMethod(Method method)
 {
     method_ = method;
 }
 
-HttpMethod::Method HttpMethod::GetMethod()
+Method HttpMethod::GetMethod()
 {
     return method_;
 }

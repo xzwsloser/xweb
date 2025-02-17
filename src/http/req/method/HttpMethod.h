@@ -4,12 +4,7 @@
 
 namespace xweb {
 
-class HttpMethod {
-public:
-    HttpMethod() = default;
-    ~HttpMethod() = default;
-
-    enum class Method {
+enum class Method {
         GET,
         POST,
         PUT,
@@ -20,15 +15,21 @@ public:
         TRACE,
         CONNECT,
         UNKNOW
-    };
+};
 
-    static Method CovertToMethod(const std::string& method);
-    static std::string ConvertToStr(Method method);
+class HttpMethod {
+public:
+    HttpMethod() = default;
+    ~HttpMethod() = default;
+
+
+    static Method CoverToMethod(const std::string& method);
+    static std::string ConverToStr(Method method);
 
     void SetMethod(Method method);
     Method GetMethod();
 
-    std::string ToString() { return ConvertToStr(method_); }
+    std::string ToString() { return ConverToStr(method_); }
 
 private:
     Method method_;

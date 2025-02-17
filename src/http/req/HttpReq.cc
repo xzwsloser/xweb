@@ -4,7 +4,7 @@
 
 namespace xweb {
 
-void HttpReq::Parse(const std::string& req)
+int HttpReq::Parse(const std::string& req)
 {
     std::string kCRCF = "\r\n";
     int pos = req.find(kCRCF + kCRCF);
@@ -17,10 +17,12 @@ void HttpReq::Parse(const std::string& req)
     std::vector<std::string> options;   
     StringUtils::Split(reqLine , " " , options);
 
-    method_.SetMethod(HttpMethod::CovertToMethod(options[0]));
+    method_.SetMethod(HttpMethod::CoverToMethod(options[0]));
     version_.SetVersion(HttpVersion::ConverToVersion(options[2]));
     route_.Parse(options[1]);
     header_.Parse(headerStr);
+
+    return kSuccess;
 }
 
 std::string HttpReq::ToString()

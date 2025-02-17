@@ -12,7 +12,7 @@ public:
     HttpRoute() = default; 
     ~HttpRoute() = default;
 
-    void Parse(const std::string& path);
+    int Parse(const std::string& path);
 
     void SetPath(const std::string& path);
     std::string GetPath();
