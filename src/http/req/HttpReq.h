@@ -29,19 +29,21 @@ public:
 
     int Parse(const std::string& req);
     
-    HttpMethod& GetMethod() { return method_; }
+    HttpMethod GetMethod() { return method_; }
     void SetMethod(HttpMethod method) { method_ = method; }
+    void SetMethod(Method method) { method_.SetMethod(method); }
 
-    HttpVersion& GetVersion() { return version_; }
+    HttpVersion GetVersion() { return version_; }
     void SetVersion(HttpVersion version) { version_ = version; }
+    void SetVersion(Version version) { version_.SetVersion(version); }
 
-    HttpRoute& GetRoute() { return route_; }
+    HttpRoute GetRoute() { return route_; }
     void SetRoute(HttpRoute route) { route_ = route; }
     
-    HttpHeader& GetHeader() { return header_; }
+    HttpHeader GetHeader() { return header_; }
     void SetHeader(HttpHeader header) { header_ = header; };
 
-    std::string& GetBody() { return body_; }
+    std::string GetBody() { return body_; }
     void SetBody(const std::string& body) { body_ = body; }
 
     std::string ToString();

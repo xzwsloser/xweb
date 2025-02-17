@@ -33,11 +33,14 @@ public:
     int Parse(const std::string& resp);
 
     void SetVersion(Version version) { version_.SetVersion(version); };    
-    HttpVersion& GetVersion() { return version_; }
+    HttpVersion GetVersion() { return version_; }
+
     void SetCode(StatusCode code) { code_.SetCode(code); }
-    HttpStatusCode& GetCode() { return code_; }
+    HttpStatusCode GetCode() { return code_; }
+
     void SetHeader(HttpHeader header) { header_ = header; }
-    HttpHeader& GetHeader() { return header_; }
+    HttpHeader GetHeader() { return header_; }
+
     void SetBody(const std::string& body) { body_ = body; }
     std::string GetBody() { return body_; }
 

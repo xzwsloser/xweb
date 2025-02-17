@@ -14,6 +14,12 @@ public:
     void Next() { is_continue_ = true; }
     void Abort() { is_continue_ = false; }
     bool IsContinue() { return is_continue_; }
+
+    HttpReq& req() { return req_; }
+    HttpResp& resq() { return resp_; }
+
+    void SetReq(HttpReq req) { req_ = req; }
+    void SetResp(HttpResp resp) { resp_ = resp; }
      
 private:
     HttpReq req_;
