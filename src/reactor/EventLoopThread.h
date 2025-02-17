@@ -11,6 +11,7 @@ using SP_EventLoop = std::shared_ptr<EventLoop>;
 class EventLoopThread {
 public:
   EventLoopThread();
+  EventLoopThread(SP_EventLoop loop): loop_(loop) , thread_(nullptr , deleteThread){}
   ~EventLoopThread() = default;
 
   // start the event loop

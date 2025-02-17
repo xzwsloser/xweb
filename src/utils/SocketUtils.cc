@@ -67,4 +67,52 @@ int SocketUtils::socketBindListen(int port)
     return listenfd;
 }
 
+int SocketUtils::Read(int fd , char* buffer , size_t size)
+{
+    int rc = read(fd , buffer , size);
+    return rc;
+}
+
+int SocketUtils::Read(int fd , std::string& buffer , size_t size)
+{
+    char* buf = new char[size + 1];
+    memset(buf , '\0' , size + 1);
+    int rc = read(fd , buf , size);
+    buffer = buf;
+    delete[] buf;
+    return rc;
+}
+
+int SocketUtils::Write(int fd , const std::string& buffer , size_t size)
+{
+    return Write(fd , buffer.c_str() , size);
+}
+
+int SocketUtils::Write(int fd , const char* buffer , size_t size)
+{
+    int rc = write(fd , buffer , size);
+    return rc;
+}
+
+// hello\r\nhello\r\n\r\n
+
+int SocketUtils::ReadUntil(int fd , std::string& buffer , const std::string& delimter)
+{
+    char ch = 0;
+    int rc = 0;
+    int n = delimter.size();
+
+    // abcabcdddd -> 10  
+    // dddd -> 4
+    // substr(6)
+    while(ch != delimter[n - 1] && buffer.substr(buffer.size() - delimter.size()) == delimter) {
+        rc = read(fd , &ch , 1); 
+        if(rc < 0) {
+            return rc;
+        }
+        buffer += ch;
+    }
+    return buffer.size();
+}
+
 }

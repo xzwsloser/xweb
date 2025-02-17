@@ -1,6 +1,9 @@
 // @Author: loser
 #include "HttpReq.h"
 #include "../../utils/StringUtils.h"
+#include <exception>
+#include "../../logger/Logger.h"
+#include <functional>
 
 namespace xweb {
 
@@ -32,6 +35,18 @@ std::string HttpReq::ToString()
     std::string headerStr = header_.ToString() + kCRCF + kCRCF; 
     std::string req = reqLine + headerStr + body_;
     return req;
+}
+
+int HttpReq::GetContentLength()
+{
+    int rc;
+    try {
+        rc = stoi(header_["Content-Length"]);
+    } catch(std::exception& e) {
+        LOG_ERROR << "transform content length failed!";
+        return kLogicerr;
+    }
+    return rc;
 }
 
 }

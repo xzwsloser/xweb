@@ -46,6 +46,8 @@ public:
     std::string GetBody() { return body_; }
     void SetBody(const std::string& body) { body_ = body; }
 
+    int GetContentLength();
+
     std::string ToString();
 
 private:

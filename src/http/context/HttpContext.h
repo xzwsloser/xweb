@@ -16,7 +16,7 @@ public:
     bool IsContinue() { return is_continue_; }
 
     HttpReq& req() { return req_; }
-    HttpResp& resq() { return resp_; }
+    HttpResp& resp() { return resp_; }
 
     void SetReq(HttpReq req) { req_ = req; }
     void SetResp(HttpResp resp) { resp_ = resp; }

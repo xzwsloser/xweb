@@ -44,6 +44,8 @@ public:
     void SetBody(const std::string& body) { body_ = body; }
     std::string GetBody() { return body_; }
 
+    void SetContentLength(int ContentLength)  { header_["Content-Length"] = std::to_string(ContentLength); }
+
     std::string ToString();     
 private:
     HttpVersion version_;

@@ -9,16 +9,22 @@ namespace xweb {
 class TcpServer {
 public:
     using CallBack = std::function<void(int , SP_EventLoop)>;
+
+    TcpServer() = default;
     TcpServer(EventLoop* loop , int threadNum , int port);
     ~TcpServer() = default;
-    EventLoop* getLoop() const { return loop_; }
+    TcpServer(const TcpServer&) = delete;
+    TcpServer& operator=(const TcpServer&) = delete;
+
+    void Init(int threadNum , int port); 
+    std::shared_ptr<EventLoop> getLoop() const { return loop_; }
     void start();
     void handleNewConn();
     void handleThisConn() { loop_->pollerMod(accept_channel_); }
     void setCallBack(std::function<void(int,SP_EventLoop)>&& cb) { callback_ = std::move(cb); }
 private:
     static constexpr int MAXFDS = 100000;
-    EventLoop* loop_;
+    std::shared_ptr<EventLoop> loop_;
     int thread_num_;
     std::unique_ptr<EventLoopThreadPool> event_loop_thread_pool_;
     bool started_;

@@ -11,6 +11,7 @@ EventLoopThread::EventLoopThread()
 
 }
 
+
 void EventLoopThread::deleteThread(std::thread* thread)
 {
     if(thread -> joinable()) {

@@ -32,9 +32,13 @@ private:
   void handleConn();
 
 public:
+  Channel() = default;
   Channel(EventLoop *loop);
   Channel(EventLoop *loop, int fd);
   ~Channel() ;
+
+  void SetLoop(EventLoop* loop) { this -> loop = loop; }
+  EventLoop* GetLoop() { return this -> loop; }
 
   void setFd(int fd);
   int getFd();

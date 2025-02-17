@@ -3,7 +3,6 @@
 #include "../utils/SocketUtils.h"
 #include<sys/socket.h>
 #include<arpa/inet.h>
-#include<utility>
 #include<cstring>
 #include<memory>
 
@@ -12,8 +11,8 @@ namespace xweb {
 TcpServer::TcpServer(EventLoop* loop , int threadNum , int port)
     : loop_(loop),
       thread_num_(threadNum),
-      event_loop_thread_pool_(new EventLoopThreadPool(loop_ , threadNum)),
-      accept_channel_(new Channel(loop_)),
+      event_loop_thread_pool_(new EventLoopThreadPool(loop_.get() , threadNum)),
+      accept_channel_(new Channel(loop_.get())),
       port_(port),
       listen_fd_(SocketUtils::socketBindListen(port_))
 {
@@ -25,9 +24,27 @@ TcpServer::TcpServer(EventLoop* loop , int threadNum , int port)
     }
 }
 
+void TcpServer::Init(int threadNum , int port)
+{
+    thread_num_ = threadNum;
+    port_ = port;
+    event_loop_thread_pool_.reset(new EventLoopThreadPool(loop_.get() , threadNum));
+    accept_channel_.reset(new Channel(loop_.get())); 
+    listen_fd_ = SocketUtils::socketBindListen(port);
+
+    accept_channel_ -> setFd(listen_fd_);
+    SocketUtils::ignoreSigPipe(); 
+    if(SocketUtils::setSocketNoBlocking(listen_fd_) < 0) {
+        LOG_ERROR << "set socket no block failed";
+        abort();
+    }
+
+}
+
 void TcpServer::start()
 {
     event_loop_thread_pool_ -> start();
+    loop_->loop();
     accept_channel_ -> setEvents(EPOLLIN | EPOLLET);
     accept_channel_ -> setReadHandler(std::bind(&TcpServer::handleNewConn , this)); 
     accept_channel_ -> setConnHandler(std::bind(&TcpServer::handleThisConn , this));

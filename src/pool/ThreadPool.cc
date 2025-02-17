@@ -8,10 +8,15 @@ namespace xweb {
 
 ThreadPool::ThreadPool(int minThreads, int maxThreads)
     : min_threads_(minThreads), max_threads_(maxThreads), stop_(false),
-      exit_numbers_(0) {
+      exit_numbers_(0) 
+{
   idle_threads_ = cur_threads_ = minThreads;
-  manager_ = new std::thread{&ThreadPool::manager, this};
-  for (int i = 0; i < cur_threads_; i++) {
+}
+
+void ThreadPool::Init()
+{
+    manager_ = new std::thread{&ThreadPool::manager, this};
+    for (int i = 0; i < cur_threads_; i++) {
     std::thread t{&ThreadPool::worker, this};
     workers_.insert({t.get_id(), std::move(t)});
   }

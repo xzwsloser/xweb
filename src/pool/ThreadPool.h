@@ -26,6 +26,8 @@ public:
   auto AddTask(F &&f, Args &&...args)
       -> std::future<typename std::result_of<F(Args...)>::type>;
 
+  void Init();
+
 private:
   void manager();
   void worker();
