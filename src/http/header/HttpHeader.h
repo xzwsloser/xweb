@@ -1,4 +1,5 @@
 // @Author: loser
+#pragma once
 #include "../../utils/StringUtils.h"
 #include <unordered_map>
 #include "../../utils/const.h"

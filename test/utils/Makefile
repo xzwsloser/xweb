@@ -1,13 +1,15 @@
-CC := g++
-src_target = $(wildcard *.cc)
-target = $(patsubst %.cc,%,$(src_target))
-SRC = $(wildcard ../../src/logger/*.cc  ../../src/utils/*.cc ../../src/reactor/*.cc ../../src/timer/*.cc  ../../src/server/*.cc ../../src/pool/*.cc) 
+SOURCE = $(wildcard *.cc)
+SRC = $(wildcard ../../src/*/*.cc ../../src/*/*/*.cc ../../src/*/*/*/*.cc)
+INC = $(wildcard ../../src/)
+CC = g++
 
-all: $(target)
+TARGET = $(patsubst %.cc,%,$(SOURCE))
 
-$(target):%:%.cc
-	$(CC) $< $(SRC) -o $@  -I ../../src/
+All: $(TARGET)
+
+$(TARGET):%:%.cc
+	$(CC) $< $(SRC) -o $@ -I $(INC) -g
 
 clean:
-	-rm -rf $(target)
-.PHONY: clean all
+	-rm -rf $(TARGET)
+.PHONY: all clean
