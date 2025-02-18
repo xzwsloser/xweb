@@ -44,7 +44,8 @@ public:
     void SetBody(const std::string& body) { body_ = body; }
     std::string GetBody() { return body_; }
 
-    void SetContentLength(int ContentLength)  { header_["Content-Length"] = std::to_string(ContentLength); }
+    void SetContentLength(int ContentLength)  { header_.Set("Content-Length" , std::to_string(ContentLength)); }
+    void SetContentType(const std::string& type) { header_.Set("Content-Type" , type); }
 
     std::string ToString();     
 private:

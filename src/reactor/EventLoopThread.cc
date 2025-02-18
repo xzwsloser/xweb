@@ -5,8 +5,8 @@
 namespace xweb {
 
 EventLoopThread::EventLoopThread()
-    :loop_(newElement<EventLoop>() , deleteElement<EventLoop>),
-     thread_(nullptr , deleteThread)
+    :loop_(new EventLoop()),
+     thread_(nullptr)
 {
 
 }
@@ -28,12 +28,19 @@ SP_EventLoop EventLoopThread::getLoop()
 
 void EventLoopThread::start()
 {
-    thread_.reset(newElement<std::thread>(std::bind(&EventLoopThread::threadFunc , this)));
+    thread_.reset(new std::thread(std::bind(&EventLoopThread::threadFunc , this)));
 }
 
 void EventLoopThread::threadFunc()
 {
     loop_-> loop();
+}
+
+EventLoopThread::~EventLoopThread()
+{
+    if(thread_ -> joinable()) {
+        thread_ -> join();
+    }
 }
 
 }

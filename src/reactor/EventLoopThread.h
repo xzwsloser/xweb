@@ -11,8 +11,8 @@ using SP_EventLoop = std::shared_ptr<EventLoop>;
 class EventLoopThread {
 public:
   EventLoopThread();
-  EventLoopThread(SP_EventLoop loop): loop_(loop) , thread_(nullptr , deleteThread){}
-  ~EventLoopThread() = default;
+  EventLoopThread(SP_EventLoop loop): loop_(loop) , thread_(nullptr){}
+  ~EventLoopThread();
 
   // start the event loop
   void start();
@@ -25,7 +25,7 @@ private:
   // log sys is different
   void threadFunc();
   SP_EventLoop loop_;
-  std::unique_ptr<std::thread, decltype(&deleteThread)> thread_;
+  std::unique_ptr<std::thread> thread_;
 };
 
 } // namespace xweb

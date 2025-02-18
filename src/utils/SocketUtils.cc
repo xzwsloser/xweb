@@ -105,7 +105,7 @@ int SocketUtils::ReadUntil(int fd , std::string& buffer , const std::string& del
     // abcabcdddd -> 10  
     // dddd -> 4
     // substr(6)
-    while(ch != delimter[n - 1] && buffer.substr(buffer.size() - delimter.size()) == delimter) {
+    while(ch != delimter[n - 1] || buffer.substr(buffer.size() - delimter.size()) != delimter) {
         rc = read(fd , &ch , 1); 
         if(rc < 0) {
             return rc;

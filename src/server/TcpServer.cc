@@ -8,11 +8,11 @@
 
 namespace xweb {
 
-TcpServer::TcpServer(EventLoop* loop , int threadNum , int port)
+TcpServer::TcpServer(std::shared_ptr<EventLoop> loop , int threadNum , int port)
     : loop_(loop),
       thread_num_(threadNum),
-      event_loop_thread_pool_(new EventLoopThreadPool(loop_.get() , threadNum)),
-      accept_channel_(new Channel(loop_.get())),
+      event_loop_thread_pool_(new EventLoopThreadPool(loop_ , threadNum)),
+      accept_channel_(new Channel(loop_)),
       port_(port),
       listen_fd_(SocketUtils::socketBindListen(port_))
 {
@@ -28,11 +28,13 @@ void TcpServer::Init(int threadNum , int port)
 {
     thread_num_ = threadNum;
     port_ = port;
-    event_loop_thread_pool_.reset(new EventLoopThreadPool(loop_.get() , threadNum));
-    accept_channel_.reset(new Channel(loop_.get())); 
+    event_loop_thread_pool_.reset(new EventLoopThreadPool(loop_ , threadNum));
+    accept_channel_.reset(new Channel(loop_)); 
     listen_fd_ = SocketUtils::socketBindListen(port);
 
     accept_channel_ -> setFd(listen_fd_);
+    loop_.reset(new EventLoop);
+
     SocketUtils::ignoreSigPipe(); 
     if(SocketUtils::setSocketNoBlocking(listen_fd_) < 0) {
         LOG_ERROR << "set socket no block failed";
@@ -44,12 +46,12 @@ void TcpServer::Init(int threadNum , int port)
 void TcpServer::start()
 {
     event_loop_thread_pool_ -> start();
-    loop_->loop();
     accept_channel_ -> setEvents(EPOLLIN | EPOLLET);
     accept_channel_ -> setReadHandler(std::bind(&TcpServer::handleNewConn , this)); 
     accept_channel_ -> setConnHandler(std::bind(&TcpServer::handleThisConn , this));
     loop_ -> pollerAdd(accept_channel_ , 0);
     started_ = true;
+    loop_-> loop();
 }
 
 void TcpServer::handleNewConn()
@@ -71,6 +73,7 @@ void TcpServer::handleNewConn()
             LOG_ERROR << "set no block failed!";
             return ;
         }
+        LOG_INFO << "开始执行回调函数";
         callback_(accept_fd , loop);
     }
     accept_channel_ -> setEvents(EPOLLIN | EPOLLOUT); 

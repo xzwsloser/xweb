@@ -1,0 +1,103 @@
+[INFO]	2025-02-18 08:56:40		New connection from 127.0.0.1:42358		../../../src/server/TcpServer.cc65
+[INFO]	2025-02-18 08:56:40		开始执行回调函数		../../../src/server/TcpServer.cc76
+[INFO]	2025-02-18 08:56:40		执行 NewEvent		../../../src/http/server/HttpServer.cc18
+[INFO]	2025-02-18 08:56:40		添加了事件		../../../src/http/server/HttpServer.cc26
+[INFO]	2025-02-18 08:56:40		添加事件结束		../../../src/http/server/HttpServer.cc28
+[INFO]	2025-02-18 08:56:40		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61
+[INFO]	2025-02-18 08:56:40		GET /hello HTTP/1.1
+User-Agent: PostmanRuntime/7.42.0
+Accept: */*
+Postman-Token: 4866ea97-29d8-4ddb-838d-30def3471901
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+		../../../src/http/server/HttpServer.cc66
+[WARN]	2025-02-18 08:56:40		path is empty		../../../src/http/req/route/HttpRoute.cc18
+[INFO]	2025-02-18 08:56:40		GET		../../../src/http/server/HttpServer.cc79
+[INFO]	2025-02-18 08:56:40		/hello		../../../src/http/server/HttpServer.cc80
+[INFO]	2025-02-18 08:56:40		HTTP/1.1		../../../src/http/server/HttpServer.cc81
+[INFO]	2025-02-18 08:56:40		GET执行		HttpServer_test.cc9
+[INFO]	2025-02-18 08:56:40		GET执行结束		HttpServer_test.cc27
+[INFO]	2025-02-18 08:56:40		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61
+[INFO]	2025-02-18 08:56:44		New connection from 127.0.0.1:42360		../../../src/server/TcpServer.cc65
+[INFO]	2025-02-18 08:56:44		开始执行回调函数		../../../src/server/TcpServer.cc76
+[INFO]	2025-02-18 08:56:44		执行 NewEvent		../../../src/http/server/HttpServer.cc18
+[INFO]	2025-02-18 08:56:44		添加了事件		../../../src/http/server/HttpServer.cc26
+[INFO]	2025-02-18 08:56:44		添加事件结束		../../../src/http/server/HttpServer.cc28
+[INFO]	2025-02-18 08:56:44		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61
+[INFO]	2025-02-18 08:56:44		GET /hello HTTP/1.1
+User-Agent: PostmanRuntime/7.42.0
+Accept: */*
+Postman-Token: 78d649f6-c2c6-4cdd-8e44-89f376869a0a
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+		../../../src/http/server/HttpServer.cc66
+[WARN]	2025-02-18 08:56:44		path is empty		../../../src/http/req/route/HttpRoute.cc18
+[INFO]	2025-02-18 08:56:44		GET		../../../src/http/server/HttpServer.cc79
+[INFO]	2025-02-18 08:56:44		/hello		../../../src/http/server/HttpServer.cc80
+[INFO]	2025-02-18 08:56:44		HTTP/1.1		../../../src/http/server/HttpServer.cc81
+[INFO]	2025-02-18 08:56:44		GET执行		HttpServer_test.cc9
+[INFO]	2025-02-18 08:56:44		GET执行结束		HttpServer_test.cc27
+[INFO]	2025-02-18 08:56:44		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61
+[INFO]	2025-02-18 08:57:04		New connection from 127.0.0.1:48614		../../../src/server/TcpServer.cc65
+[INFO]	2025-02-18 08:57:04		开始执行回调函数		../../../src/server/TcpServer.cc76
+[INFO]	2025-02-18 08:57:04		执行 NewEvent		../../../src/http/server/HttpServer.cc18
+[INFO]	2025-02-18 08:57:04		添加了事件		../../../src/http/server/HttpServer.cc26
+[INFO]	2025-02-18 08:57:04		添加事件结束		../../../src/http/server/HttpServer.cc28
+[INFO]	2025-02-18 08:57:04		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61
+[INFO]	2025-02-18 08:57:04		GET /hello HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36
+Sec-Purpose: prefetch;prerender
+Purpose: prefetch
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: zh-CN,zh;q=0.9
+
+		../../../src/http/server/HttpServer.cc66
+[WARN]	2025-02-18 08:57:04		path is empty		../../../src/http/req/route/HttpRoute.cc18
+[INFO]	2025-02-18 08:57:04		GET		../../../src/http/server/HttpServer.cc79
+[INFO]	2025-02-18 08:57:04		/hello		../../../src/http/server/HttpServer.cc80
+[INFO]	2025-02-18 08:57:04		HTTP/1.1		../../../src/http/server/HttpServer.cc81
+[INFO]	2025-02-18 08:57:04		GET执行		HttpServer_test.cc9
+[INFO]	2025-02-18 08:57:04		GET执行结束		HttpServer_test.cc27
+[INFO]	2025-02-18 08:57:04		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61
+[INFO]	2025-02-18 08:57:06		New connection from 127.0.0.1:37916		../../../src/server/TcpServer.cc65
+[INFO]	2025-02-18 08:57:06		开始执行回调函数		../../../src/server/TcpServer.cc76
+[INFO]	2025-02-18 08:57:06		执行 NewEvent		../../../src/http/server/HttpServer.cc18
+[INFO]	2025-02-18 08:57:06		添加了事件		../../../src/http/server/HttpServer.cc26
+[INFO]	2025-02-18 08:57:06		添加事件结束		../../../src/http/server/HttpServer.cc28
+[INFO]	2025-02-18 08:57:06		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61
+[INFO]	2025-02-18 08:57:06		GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua-platform: "Linux"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/hello
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: zh-CN,zh;q=0.9
+
+		../../../src/http/server/HttpServer.cc66
+[WARN]	2025-02-18 08:57:06		path is empty		../../../src/http/req/route/HttpRoute.cc18
+[INFO]	2025-02-18 08:57:06		GET		../../../src/http/server/HttpServer.cc79
+[INFO]	2025-02-18 08:57:06		/favicon.ico		../../../src/http/server/HttpServer.cc80
+[INFO]	2025-02-18 08:57:06		HTTP/1.1		../../../src/http/server/HttpServer.cc81
+[INFO]	2025-02-18 08:57:11		HTTP 报文开始解析		../../../src/http/server/HttpServer.cc61

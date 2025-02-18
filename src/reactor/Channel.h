@@ -8,18 +8,15 @@
 namespace xweb {
 
 class EventLoop;
-/*class HttpConnection;*/
 
 class Channel {
 private:
   using CallBack = std::function<void()>;
-  EventLoop *loop;
+  std::shared_ptr<EventLoop> loop;
   int fd_;
   uint32_t events_;      // interested events
   uint32_t revents_;     // real events
   uint32_t last_events_; // last events;
-
-  /*std::weak_ptr<HttpConnection> holder_; // connection obj*/
 
   CallBack readHandler_;
   CallBack writeHandler_;
@@ -33,12 +30,12 @@ private:
 
 public:
   Channel() = default;
-  Channel(EventLoop *loop);
-  Channel(EventLoop *loop, int fd);
+  Channel(std::shared_ptr<EventLoop> loop);
+  Channel(std::shared_ptr<EventLoop> loop, int fd);
   ~Channel() ;
 
-  void SetLoop(EventLoop* loop) { this -> loop = loop; }
-  EventLoop* GetLoop() { return this -> loop; }
+  void SetLoop(std::shared_ptr<EventLoop> loop) { this -> loop = loop; }
+  std::shared_ptr<EventLoop> GetLoop() { return this -> loop; }
 
   void setFd(int fd);
   int getFd();

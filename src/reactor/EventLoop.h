@@ -3,12 +3,13 @@
 #include "Channel.h"
 #include "EpollPoller.h"
 #include "sys/eventfd.h"
+#include <memory>
 #include <mutex>
 #include <thread>
 
 namespace xweb {
 
-class EventLoop {
+class EventLoop{
 public:
   using Function = std::function<void()>;
   EventLoop();
@@ -32,24 +33,24 @@ public:
   /*bool isInLoopThread();*/
 
 private:
-  static int createEventfd();
+  /*static int createEventfd();*/
 
   std::shared_ptr<EpollPoller> poller_; // Poller In Loop
-  int wake_up_fd_;                      // the wake up fd to wake up the subLoop
-  mutable std::mutex mutex_;
+  /*int wake_up_fd_;                      // the wake up fd to wake up the subLoop*/
+  /*mutable std::mutex mutex_;*/
   /*std::vector<Function> pending_functions_; // functions to do*/
   /*const std::thread::id thread_id_;*/
-  std::shared_ptr<Channel> wake_up_channel_;
+  /*std::shared_ptr<Channel> wake_up_channel_;*/
 
   bool is_looping_;
   bool is_quit_;
   bool is_event_handling_;
   /*bool is_calling_pending_functions_;*/
 
-  void wakeup();
-  void handleRead();
+  /*void wakeup();*/
+  /*void handleRead();*/
   /*void doPendingFunctions();*/
-  void handleConn();
+  /*void handleConn();*/
 };
 
 }

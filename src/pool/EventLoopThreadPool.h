@@ -8,14 +8,14 @@ namespace xweb {
 
 class EventLoopThreadPool {
 public:
-    EventLoopThreadPool(EventLoop* loop , int numThreads);
+    EventLoopThreadPool(std::shared_ptr<EventLoop> loop , int numThreads);
     ~EventLoopThreadPool() { LOG_INFO << "~EventLoopThreadPool "; }
 
     void start();
     SP_EventLoop getNextLoop();
 
 private:
-    EventLoop* base_loop_;
+    std::shared_ptr<EventLoop> base_loop_;
     int numThreads_;
     int index_;
     std::vector<std::shared_ptr<EventLoopThread>> threads_;

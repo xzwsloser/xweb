@@ -9,33 +9,29 @@
 #include <cassert>
 #include <memory>
 #include <sys/eventfd.h>
-#include<iostream>
 #include <vector>
 
 namespace xweb {
 
-int EventLoop::createEventfd() {
-  int evfd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
-  if (evfd < 0) {
-    /*perror("Failed in eventfd!");*/
-    LOG_ERROR << "Failed in eventfd!";
-    abort();
-  }
-  return evfd;
-}
+/*int EventLoop::createEventfd() {*/
+/*  int evfd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);*/
+/*  if (evfd < 0) {*/
+/*    *perror("Failed in eventfd!");*/
+/*    LOG_ERROR << "Failed in eventfd!";*/
+/*    abort();*/
+/*  }*/
+/*  return evfd;*/
+/*}*/
 
 EventLoop::EventLoop()
-    : poller_(new EpollPoller()), wake_up_fd_(createEventfd()),
-      wake_up_channel_(new Channel(this, wake_up_fd_)), is_looping_(false),
+    : poller_(new EpollPoller()),
+      is_looping_(false),
       is_quit_(false), is_event_handling_(false)
 {
-  wake_up_channel_->setEvents(EPOLLIN | EPOLLET);
-  wake_up_channel_->setReadHandler(std::bind(&EventLoop::handleRead, this));
-  wake_up_channel_->setConnHandler(std::bind(&EventLoop::handleConn, this));
-  poller_->epollAdd(wake_up_channel_, 0);
+
 }
 
-EventLoop::~EventLoop() { close(wake_up_fd_); }
+EventLoop::~EventLoop() { }
 
 /**/
 /*bool EventLoop::isInLoopThread() {*/
@@ -72,27 +68,28 @@ void EventLoop::pollerMod(std::shared_ptr<Channel> channel, int timeout) {
 /*  }*/
 /*}*/
 
-void EventLoop::handleConn() { this->pollerMod(wake_up_channel_, 0); }
-
-void EventLoop::wakeup() {
-  uint64_t signal = 1;
-  ssize_t n = IOUtils::writen(wake_up_fd_, &signal, sizeof(signal));
-  if (n != sizeof(signal)) {
-    /*std::cout << "EventLoop::wakeup write " << n << "bytes" << std::endl;*/
-    LOG_INFO << "EventLoop::wakeup write" << n << " bytes";
-  }
-}
-
-void EventLoop::handleRead() {
-  uint64_t res = 1;
-  ssize_t n = IOUtils::readn(wake_up_fd_, &res, sizeof(res));
-  if (n != sizeof(res)) {
-    /*std::cout << "EventLoop::handleRead reads " << n << " bytes" <<
-     * std::endl;*/
-    LOG_INFO << "EventLoop::handleRead reads " << n << " bytes";
-  }
-  wake_up_channel_->setEvents(EPOLLIN | EPOLLET);
-}
+/*void EventLoop::handleConn() { this->pollerMod(wake_up_channel_, 0); }*/
+/**/
+/*void EventLoop::wakeup() {*/
+/*  uint64_t signal = 1;*/
+/*  ssize_t n = IOUtils::writen(wake_up_fd_, &signal, sizeof(signal));*/
+/*  if (n != sizeof(signal)) {*/
+/*    *std::cout << "EventLoop::wakeup write " << n << "bytes" << std::endl;*/
+/*    LOG_INFO << "EventLoop::wakeup write" << n << " bytes";*/
+/*  }*/
+/*}*/
+/**/
+/*void EventLoop::handleRead() {*/
+/*  uint64_t res = 1;*/
+/*  ssize_t n = IOUtils::readn(wake_up_fd_, &res, sizeof(res));*/
+/*  if (n != sizeof(res)) {*/
+/*    *std::cout << "EventLoop::handleRead reads " << n << " bytes" <<*/
+/*     * std::endl;*/
+/*    LOG_INFO << "EventLoop::handleRead reads " << n << " bytes";*/
+/*  }*/
+/*  wake_up_channel_->setEvents(EPOLLIN | EPOLLET);*/
+/*}*/
+/**/
 
 void EventLoop::loop() {
   assert(!is_looping_);

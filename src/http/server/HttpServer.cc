@@ -15,13 +15,17 @@ void HttpServer::Run(int port)
 
 void HttpServer::NewEvent(int fd , SP_EventLoop loop)
 {
+    LOG_INFO << "执行 NewEvent";
+    channel_ -> setEvents(EPOLLIN | EPOLLET);
     channel_ -> setFd(fd);
-    channel_ -> SetLoop(loop.get());
+    channel_ -> SetLoop(loop);
     channel_ -> setReadHandler(std::bind(&HttpServer::handleRead , this));
     channel_ -> setErrorHandler(std::bind(&HttpServer::handleError , this));
     channel_ -> setWriteHandler(std::bind(&HttpServer::handleWrite , this));
     channel_ -> setConnHandler(std::bind(&HttpServer::handleConn , this));
+    LOG_INFO << "添加了事件";
     loop -> pollerAdd(channel_);
+    LOG_INFO << "添加事件结束";
 }
 
 void HttpServer::handleRead()
@@ -54,9 +58,13 @@ void HttpServer::handleClose()
 void HttpServer::RealHandler()
 {
     // 1. read the header and line of the request
+    LOG_INFO << "HTTP 报文开始解析";
     std::string buffer; 
     std::string kCRCF = "\r\n";
     auto rc = SocketUtils::ReadUntil(channel_ -> getFd(), buffer , kCRCF + kCRCF);
+
+    LOG_INFO << buffer;
+
     if(rc < 0) {
         LOG_ERROR << "read failed!" ; 
         handleClose();
@@ -68,19 +76,33 @@ void HttpServer::RealHandler()
 
     HttpReq req;
     req.Parse(buffer);
-    int len = req.GetContentLength();
+    LOG_INFO << req.GetMethod().ToString();
+    LOG_INFO << req.GetRoute().GetPath();
+    LOG_INFO << req.GetVersion().ToString();
+
+    int len = 0;
+    if(req.GetMethod().ToString() != HttpMethod::ConverToStr(Method::GET)) {
+        len = req.GetContentLength();
+    }
+
     if(len < 0) {
         LOG_ERROR << "content length error!";
         return ;
     }
-    std::string body;
-    len = SocketUtils::Read(channel_->getFd() , body , len);
-    if(len < 0) {
-        LOG_ERROR << "read failed!";
-        handleClose();
-        return ;
-    } else if(len == 0) {
-        LOG_WARN << "body is empty!";
+
+    std::string body = "";
+
+    if(len != 0) {
+        len = SocketUtils::Read(channel_->getFd() , body , len);
+
+        if(len < 0) {
+            LOG_ERROR << "read failed!";
+            handleClose();
+            return ;
+        } else if(len == 0) {
+            LOG_WARN << "body is empty!";
+        }
+
     }
     
     req.SetBody(body);
@@ -105,13 +127,26 @@ void HttpServer::RealHandler()
     }
 
     // 3. get the resp and send back
-    len = ctx.resp().GetBody().size(); 
-    ctx.resp().SetContentLength(len);
-    ctx.resp().SetVersion(ctx.req().GetVersion().GetVersion());
-
     std::string res = ctx.resp().ToString();
+
+    /*res = */
+    /*"HTTP/1.1 200 OK\r\n"*/
+    /*"Content-Type: text/html; charset=UTF-8\r\n"*/
+    /*"Content-Length: 138\r\n"*/
+    /*"\r\n"*/
+    /*"<!DOCTYPE html>\r\n"*/
+    /*"<html>\r\n"*/
+    /*"<head>\r\n"*/
+    /*"    <title>Sample Page</title>\r\n"*/
+    /*"</head>\r\n"*/
+    /*"<body>\r\n"*/
+    /*"    <h1>Hello, World!</h1>\r\n"*/
+    /*"</body>\r\n"*/
+    /*"</html>";*/
+    /**/
+
     len = res.size();
-    rc = SocketUtils::Write(channel_->getFd() , buffer , len);
+    rc = SocketUtils::Write(channel_->getFd() , res , len);
     if(rc <= 0) {
         LOG_ERROR << "write failed!";
         return ;

@@ -6,10 +6,10 @@
 
 namespace xweb {
 
-Channel::Channel(EventLoop *loop)
+Channel::Channel(std::shared_ptr<EventLoop> loop)
     : loop(loop), revents_(0), events_(0), last_events_(0) {}
 
-Channel::Channel(EventLoop *loop, int fd)
+Channel::Channel(std::shared_ptr<EventLoop> loop, int fd)
     : loop(loop), revents_(0), events_(0), last_events_(0), fd_(fd) {}
 
 Channel::~Channel() {
