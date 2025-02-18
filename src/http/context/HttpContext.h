@@ -20,7 +20,6 @@ public:
 
     void SetReq(HttpReq req) { req_ = req; }
     void SetResp(HttpResp resp) { resp_ = resp; }
-     
 private:
     HttpReq req_;
     HttpResp resp_;

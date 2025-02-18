@@ -15,7 +15,6 @@ void HttpServer::Run(int port)
 
 void HttpServer::NewEvent(int fd , SP_EventLoop loop)
 {
-    LOG_INFO << "执行 NewEvent";
     channel_ -> setEvents(EPOLLIN | EPOLLET);
     channel_ -> setFd(fd);
     channel_ -> SetLoop(loop);
@@ -23,9 +22,7 @@ void HttpServer::NewEvent(int fd , SP_EventLoop loop)
     channel_ -> setErrorHandler(std::bind(&HttpServer::handleError , this));
     channel_ -> setWriteHandler(std::bind(&HttpServer::handleWrite , this));
     channel_ -> setConnHandler(std::bind(&HttpServer::handleConn , this));
-    LOG_INFO << "添加了事件";
     loop -> pollerAdd(channel_);
-    LOG_INFO << "添加事件结束";
 }
 
 void HttpServer::handleRead()
@@ -58,7 +55,6 @@ void HttpServer::handleClose()
 void HttpServer::RealHandler()
 {
     // 1. read the header and line of the request
-    LOG_INFO << "HTTP 报文开始解析";
     std::string buffer; 
     std::string kCRCF = "\r\n";
     auto rc = SocketUtils::ReadUntil(channel_ -> getFd(), buffer , kCRCF + kCRCF);
@@ -72,6 +68,7 @@ void HttpServer::RealHandler()
     } else if(rc == 0) {
         LOG_ERROR << "the connection is close";
         handleClose();
+        return ;
     }
 
     HttpReq req;
@@ -87,6 +84,7 @@ void HttpServer::RealHandler()
 
     if(len < 0) {
         LOG_ERROR << "content length error!";
+        handleClose();
         return ;
     }
 
@@ -128,23 +126,6 @@ void HttpServer::RealHandler()
 
     // 3. get the resp and send back
     std::string res = ctx.resp().ToString();
-
-    /*res = */
-    /*"HTTP/1.1 200 OK\r\n"*/
-    /*"Content-Type: text/html; charset=UTF-8\r\n"*/
-    /*"Content-Length: 138\r\n"*/
-    /*"\r\n"*/
-    /*"<!DOCTYPE html>\r\n"*/
-    /*"<html>\r\n"*/
-    /*"<head>\r\n"*/
-    /*"    <title>Sample Page</title>\r\n"*/
-    /*"</head>\r\n"*/
-    /*"<body>\r\n"*/
-    /*"    <h1>Hello, World!</h1>\r\n"*/
-    /*"</body>\r\n"*/
-    /*"</html>";*/
-    /**/
-
     len = res.size();
     rc = SocketUtils::Write(channel_->getFd() , res , len);
     if(rc <= 0) {
